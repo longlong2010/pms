@@ -1,0 +1,19 @@
+<?php
+namespace mvc;
+use cache\HashCache;
+
+abstract class Controller {
+
+	protected function renderHtml($view) {
+		$param = $view['param'];
+		ob_start();
+		include("{$_SERVER['DOCUMENT_ROOT']}/../html/{$view['phtml']}");
+		$html = ob_get_contents();
+		if ($view['user_id'] == 0) {
+			$cache = new HashCache();
+			$cache->set($_SERVER['REQUEST_URI'], $html, 600);
+		}
+		ob_end_flush();
+	}
+}
+?>
