@@ -1,8 +1,8 @@
 <?php
-namespace app\login;
+namespace app\pms;
 
 use mvc\Controller;
-use app\PmsUser;
+use app\pms\PmsUser;
 
 class LoginController extends Controller {
 
@@ -18,12 +18,21 @@ class LoginController extends Controller {
 		));
 	}
 
-	public function signAction($param) {
+	public function signinAction($param) {
 		$user = new PmsUser();
 		$result = array(
 			'success' => $user->login($_POST['email'], $_POST['password']),
 			'uri' => '/dailywork/',
 		);
-		echo json_encode($result);
+		$this->renderJson($result);
+	}
+
+	public function signoutAction($param) {
+		$user = new PmsUser();
+		$result = array(
+			'success' => $user->logout(),
+			'uri' => '/login/',
+		);
+		$this->renderJson($result);
 	}
 }

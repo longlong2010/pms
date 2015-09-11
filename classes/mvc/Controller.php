@@ -4,7 +4,7 @@ use cache\HashCache;
 
 abstract class Controller {
 
-	protected function renderHtml($view) {
+	protected function renderHtml(array $view) {
 		$param = $view['param'];
 		ob_start();
 		include("{$_SERVER['DOCUMENT_ROOT']}/../html/{$view['phtml']}");
@@ -14,6 +14,11 @@ abstract class Controller {
 			$cache->set($_SERVER['REQUEST_URI'], $html, 600);
 		}
 		ob_end_flush();
+	}
+
+	protected function renderJson(array $view) {
+		header("Content-type: application/json");
+		echo json_encode($view);
 	}
 }
 ?>

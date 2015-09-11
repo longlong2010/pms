@@ -1,5 +1,5 @@
 <?php
-namespace app;
+namespace app\pms;
 use db\DataObject;
 class PmsUserDO extends DataObject {
 
@@ -8,6 +8,7 @@ class PmsUserDO extends DataObject {
 		'email'		=>	null,
 		'password'	=>	null,
 		'name'	=>	null,
+		'department_id' => null,
 	);
 
 	protected static $primary = 'user_id';
@@ -36,6 +37,14 @@ class PmsUserDO extends DataObject {
 
 	public function setName($name) {
 		return $this->set('name', $name);
+	}
+
+	public function getDepartmentId() {
+		return $this->get('department_id');
+	}
+
+	public function setDepartmentId($department_id) {
+		return $this->set('department_id', $department_id);
 	}
 
 	public function login($email, $password) {

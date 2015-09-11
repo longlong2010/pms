@@ -37,7 +37,7 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 			var email = $('input[name=email]').val();
 			var password = $('input[name=password]').val();
 			var remember = $('input[name=remember]').is(':checked');
-			$.post('/login/sign/', {email : email, password : password, remember : remember}, function(data) {
+			$.post('/login/signin/', {email : email, password : password, remember : remember}, function(data) {
 				if (data['success'] == true) {
 					window.location.href = data['uri'];
 				}

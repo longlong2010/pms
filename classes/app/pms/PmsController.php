@@ -2,7 +2,7 @@
 namespace app\pms;
 
 use mvc\Controller;
-use app\PmsUser;
+use app\pms\PmsUser;
 
 class PmsController extends Controller {
 	protected $user;

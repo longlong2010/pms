@@ -16,8 +16,9 @@ spl_autoload_register(function($class) {
 });
 
 $router = new Router();
-$router->addRoute(new Route('#^/login/sign/#', 'app\login\Login', 'sign'));
-$router->addRoute(new Route('#^/login/#', 'app\login\Login', 'index'));
+$router->addRoute(new Route('#^/login/signin/#', 'app\pms\Login', 'signin'));
+$router->addRoute(new Route('#^/login/signout/#', 'app\pms\Login', 'signout'));
+$router->addRoute(new Route('#^/login/#', 'app\pms\Login', 'index'));
 $router->addRoute(new Route('#^/dailywork/#', 'app\pms\DailyWork', 'index'));
 
 $app = new Application();

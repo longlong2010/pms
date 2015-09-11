@@ -1,5 +1,5 @@
 <?php
-namespace app;
+namespace app\pms;
 use session\Cookie;
 
 class PmsUser {
