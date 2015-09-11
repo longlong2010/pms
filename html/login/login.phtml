@@ -28,6 +28,8 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
                         </form>
                     </div>
                 </div>
+				<div class="alert alert-danger" style="display:none;">
+				</div>
             </div>
         </div>
     </div>
@@ -40,6 +42,8 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 			$.post('/login/signin/', {email : email, password : password, remember : remember}, function(data) {
 				if (data['success'] == true) {
 					window.location.href = data['uri'];
+				} else {
+					$('.alert-danger').html(data['message']).show();
 				}
 			}, 'json');
 		});

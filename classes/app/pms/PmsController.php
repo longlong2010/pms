@@ -2,10 +2,10 @@
 namespace app\pms;
 
 use mvc\Controller;
-use app\pms\PmsUser;
 
 class PmsController extends Controller {
 	protected $user;
+	protected $department;
 
 	public function __construct() {
 		$this->user = new PmsUser();
@@ -14,5 +14,6 @@ class PmsController extends Controller {
 			header('Location: /login/');
 			exit;
 		}
+		$this->department = new PmsDepartment($this->user->getDepartmentId());
 	}
 }

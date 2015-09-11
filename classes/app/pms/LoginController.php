@@ -24,6 +24,9 @@ class LoginController extends Controller {
 			'success' => $user->login($_POST['email'], $_POST['password']),
 			'uri' => '/dailywork/',
 		);
+		if (!$result['success']) {
+			$result['message'] = '用户名或密码错误';
+		}
 		$this->renderJson($result);
 	}
 

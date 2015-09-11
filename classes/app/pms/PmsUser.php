@@ -33,6 +33,10 @@ class PmsUser {
 		return $this->user_id;
 	}
 
+	public function getDepartmentId() {
+		return $this->do->getDepartmentId();
+	}
+
 	public function login($email, $password) {
 		if ($this->user_id) {
 			return true;
