@@ -62,16 +62,12 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 												</thead>
 												<tbody>
 													<?php
-													foreach ($view['works'] as $w) {
-													?>
-													<tr>
-														<td>8888</td>
-														<td><?php echo $w['content'];?></td>
-														<td><?php echo $w['completion'];?></td>
-														<td><?php echo $w['hours'];?></td>
-														<td><?php echo $w['description'];?></td>
-													</tr>
-													<?php
+													switch ($view['action']) {
+														case 'write':
+														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/dailywork_write.phtml");
+														break;
+														default:
+														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/dailywork_list.phtml");
 													}
 													?>
 												</tbody>
@@ -95,6 +91,18 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 					window.location.href = data['uri'];
 				}
 			});
+		});
+		$('.btn-default').click(function() {
+			var data = {};
+			data['code'] = $('select[name=code]').val();
+			$('input.form-control').each(function(k, v) {
+				data[v.name] = v.value;
+			});
+			$.post('/dailywork/create/', data, function(data) {
+				if (data['success'] == true) {
+					window.location.href = data['uri'];
+				}
+			}, 'json');
 		});
 	});
 	</script>

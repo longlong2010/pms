@@ -23,6 +23,31 @@ class DailyWorkController extends PmsController {
 		));
 	}
 
+	public function writeAction($param) {
+		$project_util = new PmsProjectDO(null, true);
+		$codes = $project_util->getProjectCodeList();
+		$this->renderHtml(array(
+			'action' => 'write',
+			'user_id' => $user_id,
+			'name' => $name,
+			'works' => $works,
+			'codes' => $codes,
+			'department' => $department,
+			'phtml'	=> 'pms/dailywork.phtml',
+		));
+	}
+
+	public function createAction($param) {
+		$args = $_POST;
+		$user_id = $this->user->getUserId();
+		$args['user_id'] = $user_id;
+		$result = array(
+			'success' => PmsDailyWork::create($args),
+			'uri' => '/dailywork/',
+		);
+		$this->renderJson($result);	
+	}
+
 	protected function _list($user_id, $page) {
 		$work_util = new PmsDailyWorkDO(null, true);
 		$size = self::WORK_SIZE;
@@ -36,7 +61,9 @@ class DailyWorkController extends PmsController {
 
 		foreach ($work_list as $work_id) {
 			$work_do = new PmsDailyWorkDO($work_id, true);
+			$project_do = new PmsProjectDO($work_do->getProjectId(), true);
 			$data = array();
+			$data['code'] = $project_do->getCode();
 			$data['work_id'] = $work_id;
 			$data['content'] = $work_do->getContent();
 			$data['completion'] = $work_do->getCompletion();

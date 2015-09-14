@@ -1,0 +1,20 @@
+													<tr>
+														<td>
+															<select class="form-control" name="code">
+																<?php
+																foreach ($view['codes'] as $c) {
+																?>
+																<option><?php echo $c;?></option>
+																<?php
+																}
+																?>
+															</select>
+														</td>
+														<td><input class="form-control" name="content"/></td>
+														<td><input class="form-control" name="completion" /></td>
+														<td><input class="form-control" name="hours" /></td>
+														<td><input class="form-control" name="description" /></td>
+													</tr>
+													<tr>
+														<td colspan="5"><button class="btn btn-default" type="submit">提交</button></td>
+													</tr>

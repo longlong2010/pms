@@ -55,4 +55,24 @@ class PmsProjectDO extends DataObject {
 	public function setFinish($finish) {
 		return $this->set('finish', $finish);
 	}
+
+	public function getProjectCodeList() {
+		$table_name = static::$table_name;
+		$sql = "SELECT code FROM {$table_name}";
+		$result = $this->db->fetchAll($sql);
+		$list = array();
+		if ($result) {
+			foreach ($result as $row) {
+				$list[] = $row['code'];
+			}
+		}
+		return $list;
+	}
+
+	public function getProjectId($code) {
+		$table_name = static::$table_name;
+		$sql = "SELECT project_id FROM {$table_name} WHERE code = ?";
+		$row = $this->db->fetch($sql, array($code));
+		return $row ? $row['project_id'] : false;
+	}
 }
