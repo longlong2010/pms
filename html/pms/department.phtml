@@ -8,7 +8,7 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">每日工作表</h1>
+                    <h1 class="page-header">部门管理</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -43,7 +43,7 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
                 <div class="col-lg-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							每日工作表
+							部门列表
 						</div>
 						<div class="panel-body">
 							<div class="dataTable_wrapper">
@@ -53,23 +53,28 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 											<table class="table table-striped table-bordered table-hover dataTable no-footer">
 												<thead>
 													<tr>
-														<th>项目代号</th>
-														<th>工作内容</th>
-														<th>完成情况</th>
-														<th>工时</th>
-														<th>问题描述和下一步计划</th>
+														<th>部门编号</th>
+														<th>部门名称</th>
+														<th>删除</th>
 													</tr>
 												</thead>
 												<tbody>
 													<?php
-													switch ($view['action']) {
-														case 'write':
-														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/dailywork_write.phtml");
-														break;
-														default:
-														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/dailywork_list.phtml");
+													foreach ($view['departments'] as $d) {
+													?>
+													<tr>
+														<td><?php echo $d['id'];?></td>
+														<td><?php echo $d['name'];?></td>
+														<td><a href="javascript:void(0);">删除</a></td>
+													</tr>
+													<?php
 													}
 													?>
+													<tr>
+														<td><label>部门名称</label></td>
+														<td><input class="form-control" name="name"/></td>
+														<td><a href="javascript:void(0);">添加</a></td>
+													</tr>
 												</tbody>
 											</table>
 										</div>
@@ -81,22 +86,10 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 				</div>
 			</div>
         </div>
-        <!-- /#page-wrapper -->
-    </div>
+	</div>
 	<script type="text/javascript">
 	$(document).ready(function() {
-		$('.btn-default').click(function() {
-			var data = {};
-			data['code'] = $('select[name=code]').val();
-			$('input.form-control').each(function(k, v) {
-				data[v.name] = v.value;
-			});
-			$.post('/dailywork/create/', data, function(data) {
-				if (data['success'] == true) {
-					window.location.href = data['uri'];
-				}
-			}, 'json');
-		});
+
 	});
 	</script>
 <?php

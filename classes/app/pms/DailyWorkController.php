@@ -24,6 +24,10 @@ class DailyWorkController extends PmsController {
 	}
 
 	public function writeAction($param) {
+		$user_id = $this->user->getUserId();
+		$name = $this->user->getName();
+		$department = $this->department->getName();
+
 		$project_util = new PmsProjectDO(null, true);
 		$codes = $project_util->getProjectCodeList();
 		$this->renderHtml(array(
