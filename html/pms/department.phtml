@@ -65,7 +65,7 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 													<tr>
 														<td><?php echo $d['id'];?></td>
 														<td><?php echo $d['name'];?></td>
-														<td><a href="javascript:void(0);">删除</a></td>
+														<td><button ref="<?php echo $d['id'];?>" class="btn btn-danger" type="button">删除</button></td>
 													</tr>
 													<?php
 													}
@@ -73,7 +73,7 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 													<tr>
 														<td><label>部门名称</label></td>
 														<td><input class="form-control" name="name"/></td>
-														<td><a href="javascript:void(0);">添加</a></td>
+														<td><button class="btn btn-primary" type="button">添加</button></td>
 													</tr>
 												</tbody>
 											</table>
@@ -89,7 +89,20 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 	</div>
 	<script type="text/javascript">
 	$(document).ready(function() {
-
+		$('.btn-danger').click(function() {
+			$.get('/department/delete/', {id : $(this).attr('ref')}, function(data) {
+				if (data['success'] == true) {
+					window.location.href = data['uri'];
+				}
+			}, 'json');
+		});
+		$('.btn-primary').click(function() {
+			$.post('/department/create/', {name : $('input[name=name]').val()}, function(data) {
+				if (data['success'] == true) {
+					window.location.href = data['uri'];
+				}
+			});
+		});
 	});
 	</script>
 <?php

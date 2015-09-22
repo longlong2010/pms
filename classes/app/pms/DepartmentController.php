@@ -42,10 +42,19 @@ class DepartmentController extends PmsController {
 	}
 
 	public function createAction($param) {
-
+		$args = $_POST;
+		$result = array(
+			'success' => PmsDepartment::create($args) != false,
+			'uri' => '/department/',
+		);
+		$this->renderJson($result);	
 	}
 
 	public function deleteAction($param) {
-
+		$result = array(
+			'success' => PmsDepartment::delete($args) != false,
+			'uri' => '/department/',
+		);
+		$this->renderJson($result);	
 	}
 }

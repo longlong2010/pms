@@ -24,6 +24,8 @@ $router->addRoute(new Route('#^/dailywork/create/#', 'app\pms\DailyWork', 'creat
 $router->addRoute(new Route('#^/dailywork/write/#', 'app\pms\DailyWork', 'write'));
 $router->addRoute(new Route('#^/dailywork/#', 'app\pms\DailyWork', 'index'));
 
+$router->addRoute(new Route('#^/department/delete/#', 'app\pms\Department', 'delete'));
+$router->addRoute(new Route('#^/department/create/#', 'app\pms\Department', 'create'));
 $router->addRoute(new Route('#^/department/#', 'app\pms\Department', 'index'));
 
 $app = new Application();

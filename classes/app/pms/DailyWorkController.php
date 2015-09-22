@@ -46,7 +46,7 @@ class DailyWorkController extends PmsController {
 		$user_id = $this->user->getUserId();
 		$args['user_id'] = $user_id;
 		$result = array(
-			'success' => PmsDailyWork::create($args),
+			'success' => PmsDailyWork::create($args) != false,
 			'uri' => '/dailywork/',
 		);
 		$this->renderJson($result);	
