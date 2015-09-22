@@ -51,6 +51,7 @@ class DepartmentController extends PmsController {
 	}
 
 	public function deleteAction($param) {
+		$args = $_GET;
 		$result = array(
 			'success' => PmsDepartment::delete($args) != false,
 			'uri' => '/department/',

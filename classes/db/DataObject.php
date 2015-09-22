@@ -80,7 +80,7 @@ class DataObject {
 		$table_name = static::$table_name;
 		$primary = static::$primary;
 		$fields = $this->fields;
-		$sql = "DELETE FROM {$table_name} WHERE {$primary} = ?'";
+		$sql = "DELETE FROM {$table_name} WHERE {$primary} = ?";
 		$ret = $this->db->execute($sql, array($fields[$primary]));
 		if ($ret !== false) {
 			$this->clearCache();
