@@ -51,30 +51,15 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 									<div class="row">
 										<div class="col-sm-12">
 											<table class="table table-striped table-bordered table-hover dataTable no-footer">
-												<thead>
-													<tr>
-														<th>用户编号</th>
-														<th>姓名</th>
-														<th>邮箱</th>
-														<th>部门</th>
-														<th>编辑用户</th>
-													</tr>
-												</thead>
-												<tbody>
-												<?php
-												foreach ($view['users'] as $user) {
-												?>
-													<tr>
-														<td><?php echo $user['user_id']?></td>
-														<td><?php echo $user['name'];?></td>
-														<td><?php echo $user['email'];?></td>
-														<td><?php echo $user['department'];?></td>
-														<td><a href="/user/edit/u/<?php echo $user['user_id'];?>">编辑</a></td>
-													</tr>
-												<?php
-												}
-												?>
-												</tbody>
+													<?php
+													switch ($view['action']) {
+														case 'edit':
+														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/user_edit.phtml");
+														break;
+														default:
+														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/user_list.phtml");
+													}
+													?>
 											</table>
 										</div>
 									</div>

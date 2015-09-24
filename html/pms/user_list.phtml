@@ -1,0 +1,24 @@
+												<thead>
+													<tr>
+														<th>用户编号</th>
+														<th>姓名</th>
+														<th>邮箱</th>
+														<th>部门</th>
+														<th>编辑用户</th>
+													</tr>
+												</thead>
+												<tbody>
+												<?php
+												foreach ($view['users'] as $user) {
+												?>
+													<tr>
+														<td><?php echo $user['user_id']?></td>
+														<td><?php echo $user['name'];?></td>
+														<td><?php echo $user['email'];?></td>
+														<td><?php echo $user['department'];?></td>
+														<td><a href="/user/edit/u/<?php echo $user['user_id'];?>">编辑</a></td>
+													</tr>
+												<?php
+												}
+												?>
+												</tbody>

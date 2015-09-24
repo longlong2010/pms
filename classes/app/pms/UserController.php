@@ -15,10 +15,37 @@ class UserController extends PmsController {
 		$users = $list['users'];
 
 		$this->renderHtml(array(
+			'action' => 'list',
 			'user_id' => $user_id,
 			'name' => $name,
 			'department' => $department,
 			'users' => $users,
+			'phtml'	=> 'pms/user.phtml',
+		));
+	}
+
+	public function editAction($param) {
+		$user_id = $this->user->getUserId();
+		$name = $this->user->getName();
+		$department = $this->department->getName();
+
+		$user_do = new PmsUserDO($param['u'], true);
+		$department_do = new PmsDepartmentDO($user_do->getDepartmentId(), true);
+		$user = array();
+		$user['user_id'] = $param['u'];
+		$user['name'] = $user_do->getName();
+		$user['email'] = $user_do->getEmail();
+		$user['department'] = $department_do->getName();
+
+		$department_util = new PmsDepartmentDO(null, true);
+		$list = $department_util->getDepartmentList(0, 100);
+
+		$this->renderHtml(array(
+			'action' => 'edit',
+			'user_id' => $user_id,
+			'name' => $name,
+			'department' => $department,
+			'user' => $user,
 			'phtml'	=> 'pms/user.phtml',
 		));
 	}

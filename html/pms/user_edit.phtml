@@ -1,0 +1,22 @@
+												<thead>
+													<tr>
+														<th>用户编号</th>
+														<th>姓名</th>
+														<th>邮箱</th>
+														<th>部门</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><?php echo $view['user']['user_id'];?></td>
+														<td><input name="name" value="<?php echo $view['user']['name'];?>" class="form-control"/></td>
+														<td><input name="email" value="<?php echo $view['user']['email'];?>" class="form-control" /></td>
+														<td>
+															<select name="department">
+																<?php
+																
+																?>
+															</select>
+														</td>
+													</tr>
+												</tbody>
