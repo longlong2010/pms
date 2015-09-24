@@ -54,4 +54,24 @@ class PmsUserDO extends DataObject {
 		$row = $this->db->fetch($sql, array($email, $password));
 		return $row ? $row['user_id'] : false;
 	}
+
+	public function getUserCount() {
+		$table_name = static::$table_name;
+		$sql = "SELECT COUNT(*) AS m FROM {$table_name}";
+		$row = $this->db->fetch($sql);
+		return $row ? $row['m'] : false;
+	}
+
+	public function getUserList($offset = 0, $size = 10) {
+		$table_name = static::$table_name;
+		$sql = "SELECT user_id FROM {$table_name} LIMIT {$size} OFFSET {$offset}";
+		$result = $this->db->fetchAll($sql);
+		$list = array();
+		if ($result) {
+			foreach ($result as $row) {
+				$list[] = $row['user_id'];
+			}
+		}
+		return $list;
+	}
 }

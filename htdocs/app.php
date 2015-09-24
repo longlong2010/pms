@@ -28,6 +28,8 @@ $router->addRoute(new Route('#^/department/delete/#', 'app\pms\Department', 'del
 $router->addRoute(new Route('#^/department/create/#', 'app\pms\Department', 'create'));
 $router->addRoute(new Route('#^/department/#', 'app\pms\Department', 'index'));
 
+$router->addRoute(new Route('#^/user/#', 'app\pms\User', 'index'));
+
 $app = new Application();
 try {
 	$app->run($router, $_GET['route']);
