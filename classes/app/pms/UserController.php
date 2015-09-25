@@ -24,30 +24,84 @@ class UserController extends PmsController {
 		));
 	}
 
+	public function addAction($param) {
+		$user_id = $this->user->getUserId();
+		$name = $this->user->getName();
+		$department = $this->department->getName();
+
+		$department_util = new PmsDepartmentDO(null, true);
+		$list = $department_util->getDepartmentList(0, 100);
+
+		$departments = array();
+		foreach ($list as $department_id) {
+			$department_do = new PmsDepartmentDO($department_id, true);
+			$data = array();
+			$data['id'] = $department_id;
+			$data['name'] = $department_do->getName();
+			$departments[] = $data;
+		}
+
+		$this->renderHtml(array(
+			'action' => 'add',
+			'user_id' => $user_id,
+			'name' => $name,
+			'department' => $department,
+			'departments' => $departments,
+			'phtml'	=> 'pms/user.phtml',
+		));
+	}
+
 	public function editAction($param) {
 		$user_id = $this->user->getUserId();
 		$name = $this->user->getName();
 		$department = $this->department->getName();
 
 		$user_do = new PmsUserDO($param['u'], true);
-		$department_do = new PmsDepartmentDO($user_do->getDepartmentId(), true);
 		$user = array();
 		$user['user_id'] = $param['u'];
 		$user['name'] = $user_do->getName();
 		$user['email'] = $user_do->getEmail();
-		$user['department'] = $department_do->getName();
+		$user['department_id'] = $user_do->getDepartmentId();
 
 		$department_util = new PmsDepartmentDO(null, true);
 		$list = $department_util->getDepartmentList(0, 100);
+
+		$departments = array();
+		foreach ($list as $department_id) {
+			$department_do = new PmsDepartmentDO($department_id, true);
+			$data = array();
+			$data['id'] = $department_id;
+			$data['name'] = $department_do->getName();
+			$departments[] = $data;
+		}
 
 		$this->renderHtml(array(
 			'action' => 'edit',
 			'user_id' => $user_id,
 			'name' => $name,
 			'department' => $department,
+			'departments' => $departments,
 			'user' => $user,
 			'phtml'	=> 'pms/user.phtml',
 		));
+	}
+
+	public function createAction($param) {
+		$args = $_POST;
+		$result = array(
+			'success' => PmsUser::create($args) != false,
+			'uri' => '/user/',
+		);
+		$this->renderJson($result);	
+	}
+
+	public function modifyAction($param) {
+		$args = $_POST;
+		$result = array(
+			'success' => PmsUser::modify($args) !== false,
+			'uri' => '/user/',
+		);
+		$this->renderJson($result);	
 	}
 
 	protected function _list($page) {

@@ -3,20 +3,29 @@
 														<th>用户编号</th>
 														<th>姓名</th>
 														<th>邮箱</th>
+														<th>密码</th>
 														<th>部门</th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
-														<td><?php echo $view['user']['user_id'];?></td>
+														<td><p name="id"><?php echo $view['user']['user_id'];?></p></td>
 														<td><input name="name" value="<?php echo $view['user']['name'];?>" class="form-control"/></td>
-														<td><input name="email" value="<?php echo $view['user']['email'];?>" class="form-control" /></td>
+														<td><input name="email" value="<?php echo $view['user']['email'];?>" class="form-control" style="width:250px;"/></td>
+														<td><input type="password" name="password" class="form-control" /></td>
 														<td>
-															<select name="department">
+															<select name="department" class="form-control">
 																<?php
-																
+																foreach ($view['departments'] as $d) {
+																?>
+																<option <?php echo $d['id'] == $view['user']['department_id'] ? 'selected="selected"' : '';?> value="<?php echo $d['id'];?>"><?php echo $d['name'];?></option>
+																<?php
+																}
 																?>
 															</select>
 														</td>
+													</tr>
+													<tr>
+														<td colspan="5"><button class="btn btn-default" type="submit">提交</button></td>
 													</tr>
 												</tbody>

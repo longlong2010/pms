@@ -29,6 +29,8 @@ $router->addRoute(new Route('#^/department/create/#', 'app\pms\Department', 'cre
 $router->addRoute(new Route('#^/department/#', 'app\pms\Department', 'index'));
 
 $router->addRoute(new Route('#^/user/edit/(u/\d+)#', 'app\pms\User', 'edit'));
+$router->addRoute(new Route('#^/user/create/#', 'app\pms\User', 'create'));
+$router->addRoute(new Route('#^/user/modify/#', 'app\pms\User', 'modify'));
 $router->addRoute(new Route('#^/user/#', 'app\pms\User', 'index'));
 
 $app = new Application();

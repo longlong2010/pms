@@ -71,6 +71,29 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 			</div>
         </div>
 	</div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('.btn-default').click(function() {
+			var data = {};
+			$('.form-control').each(function(k, v) {
+				data[v.name] = v.value;
+			});
+			var p = $('p[name=id]');
+			var gateway;
+			if (p.html()) {
+				data['id'] = p.html();
+				gateway = '/user/modify/';
+			} else {
+				gateway = '/user/create/';
+			}
+			$.post(gateway, data, function(data) {
+				if (data['success'] == true) {
+					window.location.href = data['uri'];
+				}
+			}, 'json');
+		});
+	});
+	</script>
 <?php
 include("{$_SERVER['DOCUMENT_ROOT']}/../html/footer.phtml");
 ?>

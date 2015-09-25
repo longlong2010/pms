@@ -1,6 +1,7 @@
 <?php
 namespace app\pms;
 use session\Cookie;
+use db\DbCommander;
 
 class PmsUser {
 
@@ -56,6 +57,32 @@ class PmsUser {
 			$cookie->remove();
 		}
 		return true;
+	}
+
+	public static function create(array $param) {
+		DbCommander::startTransation();
+		$user_do = new PmsUserDO(null, false);
+		$user_do->setDepartmentId($param['department']);
+		$user_do->setName($param['name']);
+		$user_do->setPassword($param['password']);
+		$user_do->setEmail($param['email']);
+		$ret = $user_do->save();
+		DbCommander::endTransation($ret);
+		return $ret;
+	}
+
+	public static function modify(array $param) {
+		DbCommander::startTransation();
+		$user_do = new PmsUserDO($param['id'], false);
+		$user_do->setDepartmentId($param['department']);
+		$user_do->setName($param['name']);
+		if ($param['password']) {
+			$user_do->setPassword($param['password']);
+		}
+		$user_do->setEmail($param['email']);
+		$ret = $user_do->save();
+		DbCommander::endTransation($ret);
+		return $ret;
 	}
 
 	protected function loadSection() {
