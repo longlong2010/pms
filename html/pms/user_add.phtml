@@ -1,6 +1,5 @@
 												<thead>
 													<tr>
-														<th>编号</th>
 														<th>姓名</th>
 														<th>邮箱</th>
 														<th>密码</th>
@@ -9,16 +8,15 @@
 												</thead>
 												<tbody>
 													<tr>
-														<td><p name="id"><?php echo $view['user']['user_id'];?></p></td>
-														<td><input name="name" value="<?php echo $view['user']['name'];?>" class="form-control"/></td>
-														<td><input name="email" value="<?php echo $view['user']['email'];?>" class="form-control" style="width:250px;"/></td>
+														<td><input name="name" class="form-control"/></td>
+														<td><input name="email" class="form-control" style="width:250px;"/></td>
 														<td><input type="password" name="password" class="form-control" /></td>
 														<td>
 															<select name="department" class="form-control">
 																<?php
 																foreach ($view['departments'] as $d) {
 																?>
-																<option <?php echo $d['id'] == $view['user']['department_id'] ? 'selected="selected"' : '';?> value="<?php echo $d['id'];?>"><?php echo $d['name'];?></option>
+																<option value="<?php echo $d['id'];?>"><?php echo $d['name'];?></option>
 																<?php
 																}
 																?>

@@ -75,4 +75,24 @@ class PmsProjectDO extends DataObject {
 		$row = $this->db->fetch($sql, array($code));
 		return $row ? $row['project_id'] : false;
 	}
+
+	public function getProjectCount() {
+		$table_name = static::$table_name;
+		$sql = "SELECT COUNT(*) AS m FROM {$table_name}";
+		$row = $this->db->fetch($sql);
+		return $row ? $row['m'] : false;
+	}
+
+	public function getProjectList($offset = 0, $size = 10) {
+		$table_name = static::$table_name;
+		$sql = "SELECT project_id FROM {$table_name} LIMIT {$size} OFFSET {$offset}";
+		$result = $this->db->fetchAll($sql);
+		$list = array();
+		if ($result) {
+			foreach ($result as $row) {
+				$list[] = $row['project_id'];
+			}
+		}
+		return $list;
+	}
 }
