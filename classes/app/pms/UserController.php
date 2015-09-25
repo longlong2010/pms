@@ -8,26 +8,17 @@ class UserController extends PmsController {
 	const USER_SIZE = 10;
 
 	public function indexAction($param) {
-		$user_id = $this->user->getUserId();
-		$name = $this->user->getName();
-		$department = $this->department->getName();
 		$list = $this->_list($page = 1);
 		$users = $list['users'];
 
 		$this->renderHtml(array(
 			'action' => 'list',
-			'user_id' => $user_id,
-			'name' => $name,
-			'department' => $department,
 			'users' => $users,
 			'phtml'	=> 'pms/user.phtml',
 		));
 	}
 
 	public function addAction($param) {
-		$user_id = $this->user->getUserId();
-		$name = $this->user->getName();
-		$department = $this->department->getName();
 
 		$department_util = new PmsDepartmentDO(null, true);
 		$list = $department_util->getDepartmentList(0, 100);
@@ -43,18 +34,12 @@ class UserController extends PmsController {
 
 		$this->renderHtml(array(
 			'action' => 'add',
-			'user_id' => $user_id,
-			'name' => $name,
-			'department' => $department,
 			'departments' => $departments,
 			'phtml'	=> 'pms/user.phtml',
 		));
 	}
 
 	public function editAction($param) {
-		$user_id = $this->user->getUserId();
-		$name = $this->user->getName();
-		$department = $this->department->getName();
 
 		$user_do = new PmsUserDO($param['u'], true);
 		$user = array();
@@ -77,9 +62,6 @@ class UserController extends PmsController {
 
 		$this->renderHtml(array(
 			'action' => 'edit',
-			'user_id' => $user_id,
-			'name' => $name,
-			'department' => $department,
 			'departments' => $departments,
 			'user' => $user,
 			'phtml'	=> 'pms/user.phtml',

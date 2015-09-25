@@ -85,7 +85,7 @@ class PmsProjectDO extends DataObject {
 
 	public function getProjectList($offset = 0, $size = 10) {
 		$table_name = static::$table_name;
-		$sql = "SELECT project_id FROM {$table_name} LIMIT {$size} OFFSET {$offset}";
+		$sql = "SELECT project_id FROM {$table_name} ORDER BY project_id DESC LIMIT {$size} OFFSET {$offset}";
 		$result = $this->db->fetchAll($sql);
 		$list = array();
 		if ($result) {

@@ -9,34 +9,22 @@ class DailyWorkController extends PmsController {
 
 	public function indexAction($param) {
 		$user_id = $this->user->getUserId();
-		$name = $this->user->getName();
-		$department = $this->department->getName();
-
 		$list = $this->_list($user_id, $page = 1);
 		$works = $list['works'];
 		$this->renderHtml(array(
-			'user_id' => $user_id,
-			'name' => $name,
 			'works' => $works,
-			'department' => $department,
 			'phtml'	=> 'pms/dailywork.phtml',
 		));
 	}
 
 	public function writeAction($param) {
-		$user_id = $this->user->getUserId();
-		$name = $this->user->getName();
-		$department = $this->department->getName();
 
 		$project_util = new PmsProjectDO(null, true);
 		$codes = $project_util->getProjectCodeList();
 		$this->renderHtml(array(
 			'action' => 'write',
-			'user_id' => $user_id,
-			'name' => $name,
 			'works' => $works,
 			'codes' => $codes,
-			'department' => $department,
 			'phtml'	=> 'pms/dailywork.phtml',
 		));
 	}

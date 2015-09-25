@@ -22,7 +22,7 @@ class PmsDepartmentDO extends DataObject {
 
 	public function getDepartmentList($offset = 0, $size = 10) {
 		$table_name = static::$table_name;
-		$sql = "SELECT id FROM {$table_name} ORDER BY id DESC LIMIT {$size} OFFSET {$offset}";
+		$sql = "SELECT id FROM {$table_name} ORDER BY id ASC LIMIT {$size} OFFSET {$offset}";
 		$result = $this->db->fetchAll($sql);
 		$list = array();
 		if ($result) {

@@ -1,0 +1,26 @@
+												<thead>
+													<tr>
+														<th>项目编号</th>
+														<th>项目名称</th>
+														<th>负责人</th>
+														<th>开始时间</th>
+														<th>结束时间</th>
+														<th>查看项目人员</th>
+													</tr>
+												</thead>
+												<tbody>
+												<?php
+												foreach ($view['projects'] as $project) {
+												?>
+													<tr>
+														<td><?php echo $project['code'];?></td>
+														<td><?php echo $project['name'];?></td>
+														<td><?php echo $project['user'];?></td>
+														<td><?php echo $project['start'];?></td>
+														<td><?php echo $project['finish'];?></td>
+														<td><a href="/project/view/p/<?php echo $project['project_id'];?>/">项目人员</a></td>
+													</tr>
+												<?php
+												}
+												?>
+												</tbody>

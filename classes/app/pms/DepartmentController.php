@@ -8,9 +8,6 @@ class DepartmentController extends PmsController {
 	const DEPARTMENT_SIZE = 10;
 
 	public function indexAction($param) {
-		$user_id = $this->user->getUserId();
-		$name = $this->user->getName();
-		$department = $this->department->getName();
 
 		$department_util = new PmsDepartmentDO(null, true);
 		$size = self::DEPARTMENT_SIZE;
@@ -33,9 +30,6 @@ class DepartmentController extends PmsController {
 		}
 
 		$this->renderHtml(array(
-			'user_id' => $user_id,
-			'name' => $name,
-			'department' => $department,
 			'departments' => $departments,
 			'phtml'	=> 'pms/department.phtml',
 		));

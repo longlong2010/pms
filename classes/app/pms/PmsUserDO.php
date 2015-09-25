@@ -64,7 +64,7 @@ class PmsUserDO extends DataObject {
 
 	public function getUserList($offset = 0, $size = 10) {
 		$table_name = static::$table_name;
-		$sql = "SELECT user_id FROM {$table_name} LIMIT {$size} OFFSET {$offset}";
+		$sql = "SELECT user_id FROM {$table_name} ORDER BY user_id ASC LIMIT {$size} OFFSET {$offset}";
 		$result = $this->db->fetchAll($sql);
 		$list = array();
 		if ($result) {

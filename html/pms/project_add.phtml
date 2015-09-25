@@ -1,0 +1,31 @@
+												<thead>
+													<tr>
+														<th>项目编号</th>
+														<th>项目名称</th>
+														<th>负责人</th>
+														<th>开始时间</th>
+														<th>结束时间</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><input name="code" class="form-control" /></td>
+														<td><input name="name" class="form-control" /></td>
+														<td>
+															<select name="manager_id" class="form-control">
+															<?php
+															foreach ($view['users'] as $user) {
+															?>
+																<option value="<?php echo $user['user_id'];?>"><?php echo $user['name'];?></option>
+															<?php
+															}
+															?>
+															</select>
+														</td>
+														<td><input name="start" class="form-control" /></td>
+														<td><input name="finish" class="form-control" /></td>
+													</tr>
+													<tr>
+														<td colspan="5"><button class="btn btn-default" type="submit">提交</button></td>
+													</tr>
+												</tbody>
