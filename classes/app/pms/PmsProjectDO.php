@@ -95,4 +95,11 @@ class PmsProjectDO extends DataObject {
 		}
 		return $list;
 	}
+
+	public function getUserProjectCount($user_id) {
+		$table_name = static::$table_name;
+		$sql = "SELECT COUNT(*) AS m FROM {$table_name} WHERE manager_id = ?";
+		$row = $this->db->fetch($sql, array($user_id));
+		return $row ? $row['m'] : false;
+	}
 }

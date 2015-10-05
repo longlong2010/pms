@@ -40,13 +40,7 @@ class PmsProject {
 		$project_do->setStart($param['start']);
 		$project_do->setFinish($param['finish']);
 		$project_id = $project_do->save();
-		if ($project_id) {
-			$member_do = new PmsProjectMemberDO(null, false);
-			$member_do->setProjectId($project_id);
-			$member_do->setUserId($param['manager_id']);
-			$ret = $member_do->save();
-		}
-		DbCommander::endTransation($ret);
-		return $ret;
+		DbCommander::endTransation($project_id);
+		return $project_id;
 	}
 }

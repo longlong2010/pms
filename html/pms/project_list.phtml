@@ -6,6 +6,7 @@
 														<th>开始时间</th>
 														<th>结束时间</th>
 														<th>查看项目人员</th>
+														<th>查看项目工作表</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -19,6 +20,7 @@
 														<td><?php echo $project['start'];?></td>
 														<td><?php echo $project['finish'];?></td>
 														<td><a href="/project/view/p/<?php echo $project['project_id'];?>/">项目人员</a></td>
+														<td><a href="/project/view/p/<?php echo $project['project_id'];?>/">项目日报</a></td>
 													</tr>
 												<?php
 												}

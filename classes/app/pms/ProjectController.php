@@ -23,9 +23,12 @@ class ProjectController extends PmsController {
 		$project_id = $param['p'];
 		$page = 1;
 		$project_do = new PmsProjectDO($project_id, true);
+		$manager_id = $project_do->getManagerId();
 		$project = array();
+		$project['project_id'] = $project_id;
 		$project['name'] = $project_do->getName();
 		$project['code'] = $project_do->getCode();
+		$project['manager_id'] = $manager_id;
 
 		$member_util = new PmsProjectMemberDO(null, true);
 		$size = self::PROJECT_SIZE;
@@ -34,6 +37,7 @@ class ProjectController extends PmsController {
 		$page = $page <= $pages ? $page : $pages;
 		$offset = ($page - 1) * $size;
 		$member_list = $member_util->getProjectMemberList($project_id, $offset, $size);
+		array_unshift($member_list, $manager_id);
 
 		$members = array();
 		foreach ($member_list as $user_id) {
@@ -96,6 +100,24 @@ class ProjectController extends PmsController {
 			'uri' => '/project/',
 		);
 		$this->renderJson($result);	
+	}
+
+	public function memberAddAction($param) {
+		$args = $_POST;
+		$args['p'] = $param['p'];
+		$result = array(
+			'success' => PmsProjectMember::create($args) != false,
+		);
+		$this->renderJson($result);
+	}
+
+	public function memberDeleteAction($param) {
+		$args = $_POST;
+		$args['p'] = $param['p'];
+		$result = array(
+			'success' => PmsProjectMember::delete($args),
+		);
+		$this->renderJson($result);
 	}
 
 	protected function _list($page) {

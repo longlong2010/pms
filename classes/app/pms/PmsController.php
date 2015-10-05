@@ -22,7 +22,8 @@ class PmsController extends Controller {
 		$name = $this->user->getName();
 		$department = $this->department->getName();
 		$member_util = new PmsProjectMemberDO(null, true);
-		$project_count = $member_util->getUserProjectCount($user_id);
+		$project_util = new PmsProjectDO(null, true);
+		$project_count = $member_util->getUserProjectCount($user_id) + $project_util->getUserProjectCount($user_id);
 		
 		parent::renderHtml(array_merge(array(
 			'user_id' => $user_id,

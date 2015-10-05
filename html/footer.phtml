@@ -9,7 +9,7 @@
     <script src="/static/dist/js/sb-admin-2.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
-		$('.dropdown-user >> a').click(function() {
+		$('.sign-out').click(function() {
 			$.get('/login/signout/', {}, function(data) {
 				if (data['success']) {
 					window.location.href = data['uri'];

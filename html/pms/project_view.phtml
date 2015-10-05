@@ -14,10 +14,21 @@
 														<td><?php echo $view['project']['code'];?></td>
 														<td><?php echo $user['user_id'];?></td>
 														<td><?php echo $user['name'];?></td>
+														<?php
+														if ($user['user_id'] == $view['project']['manager_id']) {
+														?>
+														<td>负责人</td>
+														<?php
+														} else {
+														?>
 														<td><button ref="<?php echo $user['user_id'];?>" class="btn btn-danger" type="button">删除</button></td>
+														<?php
+														}
+														?>
 													</tr>
 												<?php
 												}
+												if ($view['users']) {
 												?>
 												<tr>
 													<td>添加成员</td>
@@ -34,4 +45,26 @@
 													</td>
 													<td><button class="btn btn-primary" type="button">添加</button></td>
 												</tr>
+												<?php
+												}
+												?>
 												</tbody>
+												<script type="text/javascript">
+												$('.btn-primary').click(function() {
+													var user_id = $('select[name=user_id]').val();
+													$.post('/project/member/p/<?php echo $view['project']['project_id'];?>/add/', {u : user_id}, function(data) {
+														if (data['success'] == true) {
+															window.location.reload();
+														}
+													}, 'json');
+												});
+
+												$('.btn-danger').click(function() {
+													var user_id = $(this).attr('ref');
+													$.post('/project/member/p/<?php echo $view['project']['project_id'];?>/delete/', {u : user_id}, function(data) {
+														if (data['success'] == true) {
+															window.location.reload();
+														}
+													}, 'json');
+												});
+												</script>

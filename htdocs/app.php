@@ -39,6 +39,8 @@ $router->addRoute(new Route('#^/project/view/(p/\d+)#', 'app\pms\Project', 'view
 $router->addRoute(new Route('#^/project/add/#', 'app\pms\Project', 'add'));
 $router->addRoute(new Route('#^/project/create/#', 'app\pms\Project', 'create'));
 $router->addRoute(new Route('#^/project/modify/#', 'app\pms\Project', 'modify'));
+$router->addRoute(new Route('#^/project/member/(p/\d+)/add/#', 'app\pms\Project', 'memberAdd'));
+$router->addRoute(new Route('#^/project/member/(p/\d+)/delete/#', 'app\pms\Project', 'memberDelete'));
 $router->addRoute(new Route('#^/project/#', 'app\pms\Project', 'index'));
 
 $app = new Application();

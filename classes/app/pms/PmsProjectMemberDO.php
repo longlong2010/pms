@@ -56,4 +56,11 @@ class PmsProjectMemberDO extends DataObject {
 		$row = $this->db->fetch($sql, array($project_id));
 		return $row ? $row['m'] : false;
 	}
+
+	public function getId($project_id, $user_id) {
+		$table_name = static::$table_name;
+		$sql = "SELECT id FROM {$table_name} WHERE project_id = ? AND user_id = ?";
+		$row = $this->db->fetch($sql, array($project_id, $user_id));
+		return $row ? $row['id'] : false;
+	}
 }
