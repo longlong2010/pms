@@ -2,6 +2,7 @@
 namespace app\pms;
 
 use mvc\Controller;
+use html\Pagination;
 
 class DailyWorkController extends PmsController {
 	
@@ -10,10 +11,21 @@ class DailyWorkController extends PmsController {
 	public function indexAction($param) {
 		$user_id = $this->user->getUserId();
 		$list = $this->_list($user_id, $page = 1);
-		$works = $list['works'];
 		$this->renderHtml(array(
-			'works' => $works,
+			'works' => $list['works'],
 			'phtml'	=> 'pms/dailywork.phtml',
+			'pagination' => $list['pagination'],
+		));
+	}
+
+	public function listAction($param) {
+		$user_id = $this->user->getUserId();
+		$page = isset($param['page']) ? ($param['page'] >= 1 ? intval($param['page']) : 1) : 1;
+		$list = $this->_list($user_id, $page);
+		$this->renderHtml(array(
+			'works' => $list['works'],
+			'phtml'	=> 'pms/dailywork.phtml',
+			'pagination' => $list['pagination'],
 		));
 	}
 
@@ -64,6 +76,8 @@ class DailyWorkController extends PmsController {
 			$works[] = $data;
 		}
 
-		return array('works' => $works);
+		$pattern = "/dailywork/list/page/{page}/";
+		$pagination = new Pagination($pattern, $page, $pages);
+		return array('works' => $works, 'pagination' => $pagination->__toString());
 	}
 }

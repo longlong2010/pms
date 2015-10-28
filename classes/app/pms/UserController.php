@@ -2,6 +2,7 @@
 namespace app\pms;
 
 use mvc\Controller;
+use html\Pagination;
 
 class UserController extends PmsController {
 
@@ -9,12 +10,24 @@ class UserController extends PmsController {
 
 	public function indexAction($param) {
 		$list = $this->_list($page = 1);
-		$users = $list['users'];
 
 		$this->renderHtml(array(
 			'action' => 'list',
-			'users' => $users,
+			'users' => $list['users'],
 			'phtml'	=> 'pms/user.phtml',
+			'pagination' => $list['pagination'],
+		));
+	}
+
+	public function listAction($param) {
+		$page = isset($param['page']) ? ($param['page'] >= 1 ? intval($param['page']) : 1) : 1;
+		$list = $this->_list($page);
+
+		$this->renderHtml(array(
+			'action' => 'list',
+			'users' => $list['users'],
+			'phtml'	=> 'pms/user.phtml',
+			'pagination' => $list['pagination'],
 		));
 	}
 
@@ -110,6 +123,8 @@ class UserController extends PmsController {
 			$users[] = $data;
 		}
 
-		return array('users' => $users);
+		$pattern = "/user/list/page/{page}/";
+		$pagination = new Pagination($pattern, $page, $pages);
+		return array('users' => $users, 'pagination' => $pagination->__toString());
 	}
 }

@@ -2,20 +2,32 @@
 namespace app\pms;
 
 use mvc\Controller;
+use html\Pagination;
 
 class ProjectController extends PmsController {
 
-	const PROJECT_SIZE = 10;
+	const PROJECT_SIZE = 1;
 
 	public function indexAction($param) {
-
 		$list = $this->_list($page = 1);
-		$projects = $list['projects'];
 		
 		$this->renderHtml(array(
 			'action' => 'list',
-			'projects' => $projects,
+			'projects' => $list['projects'],
 			'phtml' => 'pms/project.phtml',
+			'pagination' => $list['pagination'],
+		));
+	}
+
+	public function listAction($param) {
+		$page = isset($param['page']) ? ($param['page'] >= 1 ? intval($param['page']) : 1) : 1;
+		$list = $this->_list($page);
+
+		$this->renderHtml(array(
+			'action' => 'list',
+			'projects' => $list['projects'],
+			'phtml' => 'pms/project.phtml',
+			'pagination' => $list['pagination'],
 		));
 	}
 
@@ -146,6 +158,8 @@ class ProjectController extends PmsController {
 			$projects[] = $data;
 		}
 
-		return array('projects' => $projects);
+		$pattern = "/project/list/page/{page}/";
+		$pagination = new Pagination($pattern, $page, $pages);
+		return array('projects' => $projects, 'pagination' => $pagination->__toString());
 	}
 }

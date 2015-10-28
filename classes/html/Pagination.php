@@ -18,7 +18,7 @@ class Pagination {
 		if ($pages <= 1) {
 			return '';
 		}
-		$pagination = '<div class="pagination"><ul>';
+		$pagination = '<div class="pagination"><ul class="pagination">';
 		$i = $page - 1;
 		if ($i > 0) {
 			$url = $this->buildUrl($i);

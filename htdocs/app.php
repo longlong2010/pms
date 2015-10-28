@@ -22,16 +22,19 @@ $router->addRoute(new Route('#^/login/#', 'app\pms\Login', 'index'));
 
 $router->addRoute(new Route('#^/dailywork/create/#', 'app\pms\DailyWork', 'create'));
 $router->addRoute(new Route('#^/dailywork/write/#', 'app\pms\DailyWork', 'write'));
+$router->addRoute(new Route('#^/dailywork/list/(page/\d+)?#', 'app\pms\DailyWork', 'list'));
 $router->addRoute(new Route('#^/dailywork/#', 'app\pms\DailyWork', 'index'));
 
 $router->addRoute(new Route('#^/department/delete/#', 'app\pms\Department', 'delete'));
 $router->addRoute(new Route('#^/department/create/#', 'app\pms\Department', 'create'));
+$router->addRoute(new Route('#^/department/list/(page/\d+)?#', 'app\pms\Department', 'list'));
 $router->addRoute(new Route('#^/department/#', 'app\pms\Department', 'index'));
 
 $router->addRoute(new Route('#^/user/edit/(u/\d+)#', 'app\pms\User', 'edit'));
 $router->addRoute(new Route('#^/user/add/#', 'app\pms\User', 'add'));
 $router->addRoute(new Route('#^/user/create/#', 'app\pms\User', 'create'));
 $router->addRoute(new Route('#^/user/modify/#', 'app\pms\User', 'modify'));
+$router->addRoute(new Route('#^/user/list/(page/\d+)?#', 'app\pms\User', 'list'));
 $router->addRoute(new Route('#^/user/#', 'app\pms\User', 'index'));
 
 $router->addRoute(new Route('#^/project/edit/(u/\d+)#', 'app\pms\Project', 'edit'));
@@ -41,6 +44,7 @@ $router->addRoute(new Route('#^/project/create/#', 'app\pms\Project', 'create'))
 $router->addRoute(new Route('#^/project/modify/#', 'app\pms\Project', 'modify'));
 $router->addRoute(new Route('#^/project/member/(p/\d+)/add/#', 'app\pms\Project', 'memberAdd'));
 $router->addRoute(new Route('#^/project/member/(p/\d+)/delete/#', 'app\pms\Project', 'memberDelete'));
+$router->addRoute(new Route('#^/project/list/(page/\d+)?#', 'app\pms\Project', 'list'));
 $router->addRoute(new Route('#^/project/#', 'app\pms\Project', 'index'));
 
 $app = new Application();
