@@ -6,7 +6,7 @@ use html\Pagination;
 
 class ProjectController extends PmsController {
 
-	const PROJECT_SIZE = 1;
+	const PROJECT_SIZE = 10;
 
 	public function indexAction($param) {
 		$list = $this->_list($page = 1);
