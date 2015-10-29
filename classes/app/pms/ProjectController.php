@@ -33,7 +33,7 @@ class ProjectController extends PmsController {
 
 	public function viewAction($param) {
 		$project_id = $param['p'];
-		$page = 1;
+		$page = isset($param['page']) ? ($param['page'] >= 1 ? intval($param['page']) : 1) : 1;
 		$project_do = new PmsProjectDO($project_id, true);
 		$manager_id = $project_do->getManagerId();
 		$project = array();
@@ -74,6 +74,9 @@ class ProjectController extends PmsController {
 			$data['name'] = $user_do->getName();
 			$users[] = $data;
 		}
+
+		$pattern = "/project/view/p/{$project_id}/page/{page}/";
+		$pagination = new Pagination($pattern, $page, $pages);
 		
 		$this->renderHtml(array(
 			'action' => 'view',
@@ -81,6 +84,7 @@ class ProjectController extends PmsController {
 			'project' => $project,
 			'users' => $users,
 			'phtml' => 'pms/project.phtml',
+			'pagination' => $pagination->__toString(),
 		));
 	}
 

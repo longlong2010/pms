@@ -38,7 +38,7 @@ $router->addRoute(new Route('#^/user/list/(page/\d+)?#', 'app\pms\User', 'list')
 $router->addRoute(new Route('#^/user/#', 'app\pms\User', 'index'));
 
 $router->addRoute(new Route('#^/project/edit/(u/\d+)#', 'app\pms\Project', 'edit'));
-$router->addRoute(new Route('#^/project/view/(p/\d+)#', 'app\pms\Project', 'view'));
+$router->addRoute(new Route('#^/project/view/(p/\d+)(?:/(page/\d+))?#', 'app\pms\Project', 'view'));
 $router->addRoute(new Route('#^/project/add/#', 'app\pms\Project', 'add'));
 $router->addRoute(new Route('#^/project/create/#', 'app\pms\Project', 'create'));
 $router->addRoute(new Route('#^/project/modify/#', 'app\pms\Project', 'modify'));
