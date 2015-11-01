@@ -31,9 +31,10 @@ class ProjectController extends PmsController {
 		));
 	}
 
-	public function viewAction($param) {
+	public function viewMemberAction($param) {
 		$project_id = $param['p'];
-		$page = 1;
+		$page = isset($param['page']) ? ($param['page'] >= 1 ? intval($param['page']) : 1) : 1;
+
 		$project_do = new PmsProjectDO($project_id, true);
 		$manager_id = $project_do->getManagerId();
 		$project = array();
@@ -74,12 +75,54 @@ class ProjectController extends PmsController {
 			$data['name'] = $user_do->getName();
 			$users[] = $data;
 		}
+
+		$pattern = "/project/view/p/{$project_id}/member/page/{page}/";
+		$pagination = new Pagination($pattern, $page, $pages);
 		
 		$this->renderHtml(array(
-			'action' => 'view',
+			'action' => 'view_member',
 			'members' => $members,
 			'project' => $project,
 			'users' => $users,
+			'phtml' => 'pms/project.phtml',
+			'pagination' => $pagination->__toString(),
+		));
+	}
+
+	public function viewDailyworkAction($param) {
+		$project_id = $param['p'];
+		$page = isset($param['page']) ? ($param['page'] >= 1 ? intval($param['page']) : 1) : 1;
+
+		$work_util = new PmsDailyWorkDO(null, true);
+		$size = self::PROJECT_SIZE;
+		$count = $work_util->getProjectDailyWorkCount($project_id);
+		$pages = ceil($count / $size);
+		$page = $page <= $pages ? $page : $pages;
+		$offset = ($page - 1) * $size;
+		$work_list = $work_util->getProjectDailyWorkList($project_id, $offset, $size);
+
+		$works = array();
+
+		foreach ($work_list as $work_id) {
+			$work_do = new PmsDailyWorkDO($work_id, true);
+			$project_do = new PmsProjectDO($work_do->getProjectId(), true);
+			$data = array();
+			$data['code'] = $project_do->getCode();
+			$data['work_id'] = $work_id;
+			$data['content'] = $work_do->getContent();
+			$data['completion'] = $work_do->getCompletion();
+			$data['hours'] = $work_do->getHours();
+			$data['description'] = $work_do->getDescription();
+			$works[] = $data;
+		}
+
+		$pattern = "/project/view/p/{$project_id}/dailywork/page/{page}/";
+		$pagination = new Pagination($pattern, $page, $pages);
+
+		return $this->renderHtml(array(
+			'action' => 'view_dailywork',
+			'works' => $works,
+			'pagination' => $pagination->__toString(),
 			'phtml' => 'pms/project.phtml',
 		));
 	}

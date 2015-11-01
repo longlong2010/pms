@@ -84,4 +84,24 @@ class PmsDailyWorkDO extends DataObject {
 		$result = $this->db->fetch($sql, array($user_id));
 		return $result ? $result['m'] : false;
 	}
+
+	public function getProjectDailyWorkList($project_id, $offset = 0, $size = 10) {
+		$table_name = static::$table_name;
+		$sql = "SELECT work_id FROM {$table_name} WHERE project_id = ? ORDER BY work_id DESC LIMIT {$size} OFFSET {$offset}";
+		$result = $this->db->fetchAll($sql, array($project_id));
+		$list = array();
+		if ($result) {
+			foreach ($result as $row) {
+				$list[] = $row['work_id'];
+			}
+		}
+		return $list;
+	}
+
+	public function getProjectDailyWorkCount($project_id) {
+		$table_name = static::$table_name;
+		$sql = "SELECT COUNT(*) AS m FROM {$table_name} WHERE project_id = ?";
+		$result = $this->db->fetch($sql, array($project_id));
+		return $result ? $result['m'] : false;
+	}
 }

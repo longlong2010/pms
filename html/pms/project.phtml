@@ -33,8 +33,11 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 														case 'add':
 														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/project_add.phtml");
 														break;
-														case 'view':
-														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/project_view.phtml");
+														case 'view_member':
+														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/project_view_member.phtml");
+														break;
+														case 'view_dailywork':
+														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/project_view_dailywork.phtml");
 														break;
 														default:
 														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/project_list.phtml");

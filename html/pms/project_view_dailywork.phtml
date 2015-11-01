@@ -1,0 +1,24 @@
+												<thead>
+													<tr>
+														<th>项目代号</th>
+														<th>工作内容</th>
+														<th>完成情况</th>
+														<th>工时</th>
+														<th>问题描述和下一步计划</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+													foreach ($view['works'] as $w) {
+													?>
+													<tr>
+														<td><?php echo $w['code'];?></td>
+														<td><?php echo $w['content'];?></td>
+														<td><?php echo $w['completion'];?></td>
+														<td><?php echo $w['hours'];?></td>
+														<td><?php echo $w['description'];?></td>
+													</tr>
+													<?php
+													}
+													?>
+												</tbody>
