@@ -68,7 +68,10 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 				}
 			}, 'json');
 		});
+		$('input[name=start]').datepicker({format: 'yyyy-mm-dd'});
+		$('input[name=finish]').datepicker({format: 'yyyy-mm-dd'});
 	});
+
 	</script>
 <?php
 include("{$_SERVER['DOCUMENT_ROOT']}/../html/footer.phtml");
