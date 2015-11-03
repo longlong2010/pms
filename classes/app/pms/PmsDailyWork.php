@@ -22,6 +22,7 @@ class PmsDailyWork {
 		$work_do = new PmsDailyWorkDO(null, false);
 		$work_do->setProjectId($project_id);
 		$work_do->setUserId($param['user_id']);
+		$work_do->setDate($param['date']);
 		$work_do->setContent($param['content']);
 		$work_do->setCompletion($param['completion']);
 		$work_do->setHours($param['hours']);

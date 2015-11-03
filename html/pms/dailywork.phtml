@@ -31,6 +31,7 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 												<thead>
 													<tr>
 														<th>项目代号</th>
+														<th>日期</th>
 														<th>工作内容</th>
 														<th>完成情况</th>
 														<th>工时</th>
@@ -75,6 +76,7 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 				}
 			}, 'json');
 		});
+		$('input[name=date]').datepicker({format: 'yyyy-mm-dd'});
 	});
 	</script>
 <?php

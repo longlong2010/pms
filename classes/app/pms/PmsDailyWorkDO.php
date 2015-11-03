@@ -7,6 +7,7 @@ class PmsDailyWorkDO extends DataObject {
 		'work_id'	=>	null,
 		'project_id' =>	null,
 		'user_id' => null,
+		'date' => null,
 		'content'	=>	null,
 		'completion'	=>	null,
 		'hours' => null,
@@ -31,6 +32,14 @@ class PmsDailyWorkDO extends DataObject {
 
 	public function setUserId($user_id) {
 		return $this->set('user_id', $user_id);
+	}
+
+	public function getDate() {
+		return $this->get('date');
+	}
+
+	public function setDate($date) {
+		return $this->set('date', $date);
 	}
 
 	public function getContent() {

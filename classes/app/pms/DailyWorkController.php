@@ -69,6 +69,7 @@ class DailyWorkController extends PmsController {
 			$data = array();
 			$data['code'] = $project_do->getCode();
 			$data['work_id'] = $work_id;
+			$data['date'] = $work_do->getDate();
 			$data['content'] = $work_do->getContent();
 			$data['completion'] = $work_do->getCompletion();
 			$data['hours'] = $work_do->getHours();
