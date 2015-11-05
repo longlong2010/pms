@@ -99,6 +99,15 @@ class UserController extends PmsController {
 		$this->renderJson($result);	
 	}
 
+	public function deleteAction($param) {
+		$args = $_GET;
+		$result = array(
+			'success' => PmsUser::delete($args) !== false,
+			'uri' => '/user/',
+		);
+		$this->renderJson($result);	
+	}
+
 	protected function _list($page) {
 		$user_util = new PmsUserDO(null, true);
 		$size = self::USER_SIZE;

@@ -75,12 +75,20 @@ class PmsUser {
 		DbCommander::startTransation();
 		$user_do = new PmsUserDO($param['id'], false);
 		$user_do->setDepartmentId($param['department']);
-		$user_do->setName($param['name']);
+		$user_do->setName(trim($param['name']));
 		if ($param['password']) {
-			$user_do->setPassword($param['password']);
+			$user_do->setPassword(trim($param['password']));
 		}
-		$user_do->setEmail($param['email']);
+		$user_do->setEmail(trim($param['email']));
 		$ret = $user_do->save();
+		DbCommander::endTransation($ret);
+		return $ret;
+	}
+
+	public static function delete(array $param) {
+		DbCommander::startTransation();
+		$user_do = new PmsUserDO($param['user_id'], false);
+		$ret = $user_do->remove();
 		DbCommander::endTransation($ret);
 		return $ret;
 	}

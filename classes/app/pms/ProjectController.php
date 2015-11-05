@@ -148,10 +148,63 @@ class ProjectController extends PmsController {
 		));
 	}
 
+	public function editAction($param) {
+		$project_id = $param['p'];
+		$project_do = new PmsProjectDO($project_id, true);
+
+		$project = array();
+
+		$project['id'] = $project_id;
+		$project['code'] = $project_do->getCode();
+		$project['name'] = $project_do->getName();
+		$project['manager_id'] = $project_do->getManagerId();
+		$project['start'] = $project_do->getStart();
+		$project['finish'] = $project_do->getFinish();
+
+		$user_util = new PmsUserDO(null, true);
+		$user_list = $user_util->getUserList(0, 9999);
+
+		$users = array();
+
+		foreach ($user_list as $user_id) {
+			$user_do = new PmsUserDO($user_id, true);
+			$data = array();
+			$data['user_id'] = $user_id;
+			$data['name'] = $user_do->getName();
+			$users[] = $data;
+		}
+		$this->renderHtml(array(
+			'action' => 'edit',
+			'users' => $users,
+			'project' => $project,
+			'phtml' => 'pms/project.phtml',
+		));
+
+		echo 1;
+	}
+
 	public function createAction($param) {
 		$args = $_POST;
 		$result = array(
 			'success' => PmsProject::create($args) != false,
+			'uri' => '/project/',
+		);
+		$this->renderJson($result);	
+	}
+
+	public function modifyAction($param) {
+		$args = $_POST;
+		$result = array(
+			'success' => PmsProject::modify($args) != false,
+			'uri' => '/project/',
+		);
+		$this->renderJson($result);	
+	}
+
+	public function deleteAction($param) {
+		$args = $_GET;
+		$result = array(
+			'success' => PmsProject::delete($args) != false,
 			'uri' => '/project/',
 		);
 		$this->renderJson($result);	

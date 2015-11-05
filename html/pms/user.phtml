@@ -73,6 +73,13 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 				}
 			}, 'json');
 		});
+		$('.btn-danger').click(function() {
+			$.get('/user/delete/', {user_id : $(this).attr('ref')}, function(data) {
+				if (data['success'] == true) {
+					window.location.href = data['uri'];
+				}
+			}, 'json');
+		});
 	});
 	</script>
 <?php

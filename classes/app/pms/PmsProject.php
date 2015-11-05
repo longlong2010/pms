@@ -43,4 +43,25 @@ class PmsProject {
 		DbCommander::endTransation($project_id);
 		return $project_id;
 	}
+
+	public static function modify(array $param) {
+		DbCommander::startTransation();
+		$project_do = new PmsProjectDO($param['id'], false);
+		$project_do->setCode($param['code']);
+		$project_do->setName($param['name']);
+		$project_do->setManagerId($param['manager_id']);
+		$project_do->setStart($param['start']);
+		$project_do->setFinish($param['finish']);
+		$ret = $project_do->save();
+		DbCommander::endTransation($ret);
+		return $ret;
+	}
+
+	public static function delete(array $param) {
+		DbCommander::startTransation();
+		$project_do = new PmsProjectDO($param['id'], false);
+		$ret = $project_do->remove();
+		DbCommander::endTransation($ret);
+		return $ret;
+	}
 }

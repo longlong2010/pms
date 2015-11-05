@@ -7,6 +7,8 @@
 														<th>结束时间</th>
 														<th>查看项目人员</th>
 														<th>查看项目工作表</th>
+														<th>编辑项目</th>
+														<th>删除项目</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -21,6 +23,8 @@
 														<td><?php echo $project['finish'];?></td>
 														<td><a href="/project/view/p/<?php echo $project['project_id'];?>/member/">项目人员</a></td>
 														<td><a href="/project/view/p/<?php echo $project['project_id'];?>/dailywork/">项目日报</a></td>
+														<td><a href="/project/edit/p/<?php echo $project['project_id'];?>">编辑</a></td>
+														<td><button ref="<?php echo $project['project_id'];?>" class="btn btn-danger" type="button">删除</button></td>
 													</tr>
 												<?php
 												}

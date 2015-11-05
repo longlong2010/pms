@@ -9,21 +9,24 @@
 												</thead>
 												<tbody>
 													<tr>
-														<td><input name="code" class="form-control" /></td>
-														<td><input name="name" class="form-control" /></td>
 														<td>
-															<select name="manager_id" class="form-control">
+															<input name="id" class="form-control" type="hidden" value="<?php echo $view['project']['id'];?>"/>
+															<input name="code" class="form-control" value="<?php echo $view['project']['code'];?>"/>
+														</td>
+														<td><input name="name" class="form-control" value="<?php echo $view['project']['name'];?>"/></td>
+														<td>
+															<select name="manager_id" class="form-control" value="<?php echo $view['project']['manager_id'];?>">
 															<?php
 															foreach ($view['users'] as $user) {
 															?>
-																<option value="<?php echo $user['user_id'];?>"><?php echo $user['name'];?></option>
+																<option <?php echo $user['user_id'] == $view['project']['manager_id'] ? 'selected="1"' : '';?> value="<?php echo $user['user_id'];?>"><?php echo $user['name'];?></option>
 															<?php
 															}
 															?>
 															</select>
 														</td>
-														<td><input name="start" class="form-control" /></td>
-														<td><input name="finish" class="form-control" /></td>
+														<td><input name="start" class="form-control" value="<?php echo $view['project']['start'];?>"/></td>
+														<td><input name="finish" class="form-control" value="<?php echo $view['project']['finish'];?>"/></td>
 													</tr>
 													<tr>
 														<td colspan="5"><button class="btn btn-default" type="submit">提交</button></td>
