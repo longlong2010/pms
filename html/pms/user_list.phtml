@@ -14,7 +14,7 @@
 												?>
 													<tr>
 														<td><?php echo $user['user_id']?></td>
-														<td><?php echo $user['name'];?></td>
+														<td><a href="/dailywork/list/u/<?php echo $user['user_id'];?>"><?php echo $user['name'];?></a></td>
 														<td><?php echo $user['email'];?></td>
 														<td><?php echo $user['department'];?></td>
 														<td><a href="/user/edit/u/<?php echo $user['user_id'];?>">编辑</a></td>

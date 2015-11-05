@@ -10,19 +10,19 @@ class DailyWorkController extends PmsController {
 
 	public function indexAction($param) {
 		$user_id = $this->user->getUserId();
-		$list = $this->_list($user_id, $page = 1);
-		$this->renderHtml(array(
-			'works' => $list['works'],
-			'phtml'	=> 'pms/dailywork.phtml',
-			'pagination' => $list['pagination'],
-		));
+		header("Location: /dailywork/list/u/{$user_id}");
+		exit;
 	}
 
 	public function listAction($param) {
-		$user_id = $this->user->getUserId();
+		$user_id = $param['u'];
+		$user_do = new PmsUserDO($user_id, true);
+		$user = array();
+		$user['name'] = $user_do->getName();
 		$page = isset($param['page']) ? ($param['page'] >= 1 ? intval($param['page']) : 1) : 1;
 		$list = $this->_list($user_id, $page);
 		$this->renderHtml(array(
+			'user' => $user,
 			'works' => $list['works'],
 			'phtml'	=> 'pms/dailywork.phtml',
 			'pagination' => $list['pagination'],
@@ -77,7 +77,7 @@ class DailyWorkController extends PmsController {
 			$works[] = $data;
 		}
 
-		$pattern = "/dailywork/list/page/{page}/";
+		$pattern = "/dailywork/list/u/{$user_id}/page/{page}/";
 		$pagination = new Pagination($pattern, $page, $pages);
 		return array('works' => $works, 'pagination' => $pagination->__toString());
 	}
