@@ -106,12 +106,15 @@ class ProjectController extends PmsController {
 		foreach ($work_list as $work_id) {
 			$work_do = new PmsDailyWorkDO($work_id, true);
 			$project_do = new PmsProjectDO($work_do->getProjectId(), true);
+			$user_do = new PmsUserDO($work_do->getUserId(), true);
 			$data = array();
 			$data['code'] = $project_do->getCode();
+			$data['user'] = $user_do->getName();
 			$data['work_id'] = $work_id;
 			$data['content'] = $work_do->getContent();
 			$data['completion'] = $work_do->getCompletion();
 			$data['hours'] = $work_do->getHours();
+			$data['date'] = $work_do->getDate();
 			$data['description'] = $work_do->getDescription();
 			$works[] = $data;
 		}
