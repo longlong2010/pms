@@ -59,10 +59,10 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 			$('.form-control').each(function(k, v) {
 				data[v.name] = v.value;
 			});
-			var p = $('p[name=id]');
+			var p = $('p[name=user_id]');
 			var gateway;
 			if (p.html()) {
-				data['id'] = p.html();
+				data['user_id'] = p.html();
 				gateway = '/user/modify/';
 			} else {
 				gateway = '/user/create/';

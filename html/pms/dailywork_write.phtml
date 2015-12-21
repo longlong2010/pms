@@ -1,21 +1,34 @@
+												<thead>
+													<tr>
+														<th>项目代号</th>
+														<th>日期</th>
+														<th>工作内容</th>
+														<th>完成情况</th>
+														<th>工时</th>
+														<th>问题描述和下一步计划</th>
+													</tr>
+												</thead>
+												<tbody>
 													<tr>
 														<td>
 															<select class="form-control" name="code">
 																<?php
 																foreach ($view['codes'] as $c) {
 																?>
-																<option><?php echo $c;?></option>
+																<option <?php echo $c == $view['work']['code'] ? 'selected="selected"' : '';?> value="<?php echo $c;?>"><?php echo $c;?></option>
 																<?php
 																}
 																?>
 															</select>
 														</td>
-														<td><input class="form-control" name="date"  style="width:120px;"/></td>
-														<td><input class="form-control" name="content"/></td>
-														<td><input class="form-control" name="completion" /></td>
-														<td><input class="form-control" name="hours" style="width:50px;" /></td>
-														<td><input class="form-control" name="description" style="width:300px;"/></td>
+														<td><input class="form-control" name="date"  value="<?php echo $view['work']['date'];?>" style="width:120px;"/></td>
+														<td><input class="form-control" name="content" value="<?php echo $view['work']['content']?>"/></td>
+														<td><input class="form-control" name="completion" value="<?php echo $view['work']['completion']?>"/></td>
+														<td><input class="form-control" name="hours" style="width:50px;" value="<?php echo $view['work']['hours'];?>"/></td>
+														<td><input class="form-control" name="description" style="width:300px;" value="<?php echo $view['work']['description'];?>"/></td>
 													</tr>
 													<tr>
+														<input type="hidden" name="work_id" value="<?php echo $view['work']['work_id'];?>"/>
 														<td colspan="6"><button class="btn btn-default" type="submit">提交</button></td>
 													</tr>
+												</tbody>

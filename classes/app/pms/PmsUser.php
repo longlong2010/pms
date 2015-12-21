@@ -73,7 +73,7 @@ class PmsUser {
 
 	public static function modify(array $param) {
 		DbCommander::startTransation();
-		$user_do = new PmsUserDO($param['id'], false);
+		$user_do = new PmsUserDO($param['user_id'], false);
 		$user_do->setDepartmentId($param['department']);
 		$user_do->setName(trim($param['name']));
 		if ($param['password']) {

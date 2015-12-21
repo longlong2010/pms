@@ -31,4 +31,32 @@ class PmsDailyWork {
 		DbCommander::endTransation($ret);
 		return $ret;
 	}
+
+	public static function modify(array $param) {
+		$project_util = new PmsProjectDO(null, true);
+		$project_id = $project_util->getProjectId($param['code']);
+		if (!$project_id) {
+			return false;
+		}
+		DbCommander::startTransation();
+		$work_do = new PmsDailyWorkDO($param['work_id'], false);
+		$work_do->setProjectId($project_id);
+		$work_do->setUserId($param['user_id']);
+		$work_do->setDate($param['date']);
+		$work_do->setContent($param['content']);
+		$work_do->setCompletion($param['completion']);
+		$work_do->setHours($param['hours']);
+		$work_do->setDescription($param['description']);
+		$ret = $work_do->save();
+		DbCommander::endTransation($ret);
+		return $ret;
+	}
+
+	public static function delete(array $param) {
+		DbCommander::startTransation();
+		$work_do = new PmsDailyWorkDO($param['work_id'], false);
+		$ret = $work_do->remove();
+		DbCommander::endTransation($ret);
+		return $ret;
+	}
 }

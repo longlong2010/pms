@@ -1,3 +1,16 @@
+												<thead>
+													<tr>
+														<th>项目代号</th>
+														<th>日期</th>
+														<th>工作内容</th>
+														<th>完成情况</th>
+														<th>工时</th>
+														<th>问题描述和下一步计划</th>
+														<th>编辑</th>
+														<th>删除</th>
+													</tr>
+												</thead>
+												<tbody>
 													<?php
 													foreach ($view['works'] as $w) {
 													?>
@@ -8,7 +21,10 @@
 														<td><?php echo $w['completion'];?></td>
 														<td><?php echo $w['hours'];?></td>
 														<td><?php echo $w['description'];?></td>
+														<td><a href="/dailywork/edit/d/<?php echo $w['work_id'];?>">编辑</a></td>
+														<td><button ref="<?php echo $w['work_id'];?>" class="btn btn-danger" type="button">删除</button></td>
 													</tr>
 													<?php
 													}
 													?>
+												</tbody>

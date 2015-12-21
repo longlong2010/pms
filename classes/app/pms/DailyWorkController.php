@@ -35,8 +35,29 @@ class DailyWorkController extends PmsController {
 		$codes = $project_util->getProjectCodeList();
 		$this->renderHtml(array(
 			'action' => 'write',
-			'works' => $works,
 			'codes' => $codes,
+			'phtml'	=> 'pms/dailywork.phtml',
+		));
+	}
+
+	public function editAction($param) {
+		$work_do = new PmsDailyWorkDO($param['d'], true);
+		$project_do = new PmsProjectDO($work_do->getProjectId(), true);
+		$work = array();
+		$work['work_id'] = $param['d'];
+		$work['code'] = $project_do->getCode();
+		$work['date'] = $work_do->getDate();
+		$work['content'] = $work_do->getContent();
+		$work['completion'] = $work_do->getCompletion();
+		$work['hours'] = $work_do->getHours();
+		$work['description'] = $work_do->getDescription();
+
+		$project_util = new PmsProjectDO(null, true);
+		$codes = $project_util->getProjectCodeList();
+		$this->renderHtml(array(
+			'action' => 'write',
+			'codes' => $codes,
+			'work' => $work,
 			'phtml'	=> 'pms/dailywork.phtml',
 		));
 	}
@@ -47,6 +68,26 @@ class DailyWorkController extends PmsController {
 		$args['user_id'] = $user_id;
 		$result = array(
 			'success' => PmsDailyWork::create($args) != false,
+			'uri' => '/dailywork/',
+		);
+		$this->renderJson($result);	
+	}
+
+	public function modifyAction($param) {
+		$args = $_POST;
+		$user_id = $this->user->getUserId();
+		$args['user_id'] = $user_id;
+		$result = array(
+			'success' => PmsDailyWork::modify($args) !== false,
+			'uri' => '/dailywork/',
+		);
+		$this->renderJson($result);
+	}
+
+	public function deleteAction($param) {
+		$args = $_GET;
+		$result = array(
+			'success' => PmsDailyWork::delete($args) !== false,
 			'uri' => '/dailywork/',
 		);
 		$this->renderJson($result);	
