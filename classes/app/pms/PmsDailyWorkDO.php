@@ -87,6 +87,19 @@ class PmsDailyWorkDO extends DataObject {
 		return $list;
 	}
 
+	public function getUserDailyWorkListByDate($user_id, $start, $finish) {
+		$table_name = static::$table_name;
+		$sql = "SELECT work_id FROM {$table_name} WHERE user_id = ? AND date >= ? AND date <= ? ORDER BY work_id ASC";
+		$result = $this->db->fetchAll($sql, array($user_id, $start, $finish));
+		$list = array();
+		if ($result) {
+			foreach ($result as $row) {
+				$list[] = $row['work_id'];
+			}
+		}
+		return $list;
+	}
+
 	public function getUserDailyWorkCount($user_id) {
 		$table_name = static::$table_name;
 		$sql = "SELECT COUNT(*) AS m FROM {$table_name} WHERE user_id = ?";

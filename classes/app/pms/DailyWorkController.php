@@ -115,6 +115,33 @@ class DailyWorkController extends PmsController {
 	}
 
 	public function downloadAction($param) {
+		$user_id = $_GET['user_id'];
+		$start = $_GET['start'];
+		$finish = $_GET['finish'];
+		
+		$user_do = new PmsUserDO($user_id, true);
+
+		$work_util = new PmsDailyWorkDO(null, true);
+		$work_list = $work_util->getUserDailyWorkListByDate($user_id, $start, $finish);
+		
+		$works = array();
+		foreach ($work_list as $work_id) {
+			$work_do = new PmsDailyWorkDO($work_id, true);
+			$project_do = new PmsProjectDO($work_do->getProjectId(), true);
+			$data = array();
+			$data['code'] = $project_do->getCode();
+			$data['date'] = $work_do->getDate();
+			$data['content'] = iconv('utf-8', 'gbk', $work_do->getContent());
+			$data['completion'] = iconv('utf-8', 'gbk', $work_do->getCompletion());
+			$data['hours'] = $work_do->getHours();
+			$data['description'] = iconv('utf-8', 'gbk', $work_do->getDescription());
+			$works[] = implode("\t", $data);
+		}
+
+		header('Content-Type: application/vnd.ms-excel;charset=utf-8');
+		header('Content-Disposition:filename=' . implode('-', array(iconv('utf-8', 'gbk', $user_do->getName()), $start, $finish)) . '.xls');
+		echo iconv('utf-8', 'gbk', "项目代号\t日期\t工作内容\t完成情况\t工时\t问题描述和下一步计划\n");
+		echo implode("\n", $works);
 	}
 
 	protected function _list($user_id, $page) {
