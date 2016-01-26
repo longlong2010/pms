@@ -33,6 +33,9 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 														case 'write':
 														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/dailywork_write.phtml");
 														break;
+														case 'export':
+														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/dailywork_export.phtml");
+														break;
 														default:
 														include("{$_SERVER['DOCUMENT_ROOT']}/../html/pms/dailywork_list.phtml");
 													}
@@ -78,7 +81,15 @@ include("{$_SERVER['DOCUMENT_ROOT']}/../html/header.phtml");
 				}
 			}, 'json');
 		});
+		$('.btn-primary').click(function() {
+			var data = {};
+			data['user_id'] = $('select[name=user_id]').val();
+			data['start'] = $('input[name=start]').val();
+			data['end'] = $('input[name=end]').val();
+		});
 		$('input[name=date]').datepicker({format: 'yyyy-mm-dd'});
+		$('input[name=start]').datepicker({format: 'yyyy-mm-dd'});
+		$('input[name=finish]').datepicker({format: 'yyyy-mm-dd'});
 	});
 	</script>
 <?php

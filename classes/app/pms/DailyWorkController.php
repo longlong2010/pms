@@ -62,6 +62,27 @@ class DailyWorkController extends PmsController {
 		));
 	}
 
+	public function exportAction($param) {
+		$user_util = new PmsUserDO(null, true);
+		$user_list = $user_util->getUserList(0, 9999);
+
+		$users = array();
+
+		foreach ($user_list as $user_id) {
+			$user_do = new PmsUserDO($user_id, true);
+			$data = array();
+			$data['user_id'] = $user_id;
+			$data['name'] = $user_do->getName();
+			$users[] = $data;
+		}
+
+		$this->renderHtml(array(
+			'action' => 'export',
+			'users' => $users,
+			'phtml'	=> 'pms/dailywork.phtml',
+		));
+	}
+
 	public function createAction($param) {
 		$args = $_POST;
 		$user_id = $this->user->getUserId();
@@ -91,6 +112,9 @@ class DailyWorkController extends PmsController {
 			'uri' => '/dailywork/',
 		);
 		$this->renderJson($result);	
+	}
+
+	public function downloadAction($param) {
 	}
 
 	protected function _list($user_id, $page) {

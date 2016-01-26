@@ -1,0 +1,25 @@
+												<thead>
+													<tr>
+														<th>人员</th>
+														<th>开始日期</th>
+														<th>结束日期</th>
+														<th>导出</th>
+													</tr>
+												</thead>
+													<tr>
+														<td>
+															<select class="form-control" name="user_id">
+															<?php
+															foreach ($view['users'] as $user) {
+															?>
+																<option value="<?php echo $user['user_id'];?>"><?php echo $user['name'];?></option>
+															<?php
+															}
+															?>
+															</select>
+														<td><input class="form-control" name="start"  style="width:120px;"/></td>
+														<td><input class="form-control" name="finish"  style="width:120px;"/></td>
+														<td><button class="btn btn-outline btn-primary" type="submit">导出</button></td>
+													</tr>
+												<tbody>
+												</tbody>

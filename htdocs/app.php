@@ -24,6 +24,8 @@ $router->addRoute(new Route('#^/dailywork/create/#', 'app\pms\DailyWork', 'creat
 $router->addRoute(new Route('#^/dailywork/modify/#', 'app\pms\DailyWork', 'modify'));
 $router->addRoute(new Route('#^/dailywork/delete/#', 'app\pms\DailyWork', 'delete'));
 $router->addRoute(new Route('#^/dailywork/write/#', 'app\pms\DailyWork', 'write'));
+$router->addRoute(new Route('#^/dailywork/export/#', 'app\pms\DailyWork', 'export'));
+$router->addRoute(new Route('#^/dailywork/download/#', 'app\pms\DailyWork', 'download'));
 $router->addRoute(new Route('#^/dailywork/list/(u/\d+)(?:/(page/\d+))?#', 'app\pms\DailyWork', 'list'));
 $router->addRoute(new Route('#^/dailywork/edit/(d/\d+)#', 'app\pms\DailyWork', 'edit'));
 $router->addRoute(new Route('#^/dailywork/#', 'app\pms\DailyWork', 'index'));
