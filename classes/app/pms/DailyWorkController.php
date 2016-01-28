@@ -129,7 +129,7 @@ class DailyWorkController extends PmsController {
 			$work_do = new PmsDailyWorkDO($work_id, true);
 			$project_do = new PmsProjectDO($work_do->getProjectId(), true);
 			$data = array();
-			$data['code'] = $project_do->getCode();
+			$data['code'] = iconv('utf-8', 'gbk', $project_do->getCode());
 			$data['date'] = $work_do->getDate();
 			$data['content'] = iconv('utf-8', 'gbk', $work_do->getContent());
 			$data['completion'] = iconv('utf-8', 'gbk', $work_do->getCompletion());
